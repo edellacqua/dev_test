@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_number_of_copies</fullName>
+    <active>true</active>
+    <errorConditionFormula>Total_number_of_copies__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Total_number_of_copies__c</errorDisplayField>
+    <errorMessage>The number of copies can&apos;t be negative!</errorMessage>
+</ValidationRule>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_number_of_copies_left</fullName>
+    <active>true</active>
+    <errorConditionFormula>Copies_Left__c &gt;  Total_number_of_copies__c ||  Copies_Left__c &lt; 0</errorConditionFormula>
+    <errorDisplayField>Copies_Left__c</errorDisplayField>
+    <errorMessage>Not a valid number of copies left</errorMessage>
+</ValidationRule>

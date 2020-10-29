@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>isEnded__c</fullName>
+    <businessStatus>Active</businessStatus>
+    <description>Checks if the lending is ended</description>
+    <externalId>false</externalId>
+    <formula>IF( NOT(ISNULL( End_Date__c )), IF( TODAY() &gt;  End_Date__c, true, false), false)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>isEnded</label>
+    <securityClassification>Public</securityClassification>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

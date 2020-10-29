@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Lending_creation_validation</fullName>
+    <active>true</active>
+    <description>Allows a lending only if enough copies are available</description>
+    <errorConditionFormula>Book__r.Copies_Left__c &lt;= 0</errorConditionFormula>
+    <errorMessage>No Copies Left for the book!</errorMessage>
+</ValidationRule>
