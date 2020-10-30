@@ -1,5 +1,6 @@
 @isTest
 public class TestManageLending {
+    
     private integer copiesLeft = 50;
     
     @isTest static void insertLendingNotEnded(){
