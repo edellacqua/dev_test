@@ -1,39 +1,38 @@
-trigger ManageLending on Lending__c (after insert, after update, after delete) {
-
-    List<Book__c> booksToUpdate = new List<Book__c>();
+trigger ManageLending on Lending__c (after insert, after update, before delete) {
     
     if(Trigger.isInsert){
         Map<Id, Lending__c> lendings = new Map<Id, Lending__c>(Trigger.new);
         //Select open lendings
-        Map<Id, Lending__c> endedLendings = [SELECT id FROM Lending__c WHERE isEnded__c = FALSE AND id in :lendings.keySet];
-        for(Lending__c l: endedLendings){
-            Book__c c = l.Book_c;
-            c.Copies_Left__c--;         //book a copy!
-            booksToUpdate.add(book);
+        List<Book__c> books = [SELECT Id, Copies_Left__c from Book__c where id in (SELECT Book__c FROM Lending__c where Id in: lendings.KeySet() AND isEnded__c = FALSE)];
+        
+        for(Book__c b: books){
+            b.Copies_Left__c--;        //book a copy!
         }
+
+        update books;
     }
     
     else if(Trigger.isUpdate){
         Map<Id, Lending__c> lendings = new Map<Id, Lending__c>(Trigger.new);
         //Close a lending
-        Map<Id, Lending__c> endedLendings = [SELECT id FROM Lending__c WHERE isEnded__c = TRUE AND id in :lendings.keySet];
-        for(Lending__c l: endedLendings){
-            Book__c c = l.Book_c;
-            c.Copies_Left__c++;         //return a copy!
-            booksToUpdate.add(book);
+        List<Book__c> books = [SELECT Id, Copies_Left__c from Book__c where id in (SELECT Book__c FROM Lending__c where Id in: lendings.KeySet() AND isEnded__c = TRUE)];
+        
+        for(Book__c b: books){
+            b.Copies_Left__c++;         //book a copy!
         }
+
+        update books;
     }
 
     else{           //delete
         Map<Id, Lending__c> lendings = new Map<Id, Lending__c>(Trigger.Old);
-        Map<Id, Lending__c> endedLendings = [SELECT id FROM Lending__c WHERE isEnded__c = FALSE AND id in :lendings.keySet];
-        for(Lending__c l: endedLendings){
-            Book__c c = l.Book_c;
-            c.Copies_Left__c++;         //return a copy!
-            booksToUpdate.add(book);
+        List<Book__c> books = [SELECT Id, Copies_Left__c from Book__c where id in (SELECT Book__c FROM Lending__c where Id in: lendings.KeySet() AND isEnded__c = FALSE)];
+        
+        for(Book__c b: books){
+            b.Copies_Left__c++;         //book a copy!
         }
+
+        update books;
     }
-    
-    update booksToUpdate;
     
 }
