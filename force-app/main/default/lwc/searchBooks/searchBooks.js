@@ -1,13 +1,18 @@
 import { api, LightningElement, track, wire } from 'lwc';
 import getLibraries from '@salesforce/apex/LibraryController.getLibraries';
+import { publish, MessageContext } from 'lightning/messageService';
+import MYCH from '@salesforce/messageChannel/MyMessageChannel__c';
 
 let i = 0;
 export default class SearchBooks extends LightningElement {
     @track value = '';
+    @track label = '';
     @track error;
     @track items = [];
     @track filter = '';
-    @track result = '';
+
+    @wire(MessageContext)
+    messageContext;
 
     @wire(getLibraries, {})
     comboBoxItems({ error, data }) {
@@ -28,6 +33,9 @@ export default class SearchBooks extends LightningElement {
     
     handleChange(event) {
         this.value = event.detail.value;
+        this.label = event.target.options.find(opt => opt.value === event.detail.value).label;
+        const message = {recordData: {librarySearch: this.label, libraryId: this.value}};
+        publish(this.messageContext, MYCH, message);
     }
 
     filterChange(event) {
@@ -35,6 +43,8 @@ export default class SearchBooks extends LightningElement {
     }
 
     clickSearch(event) {
-        this.result = this.filter;
+        
+        const message = {recordData: {textSearch: this.filter}};
+        publish(this.messageContext, MYCH, message);
     }
 }

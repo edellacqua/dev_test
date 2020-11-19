@@ -1,0 +1,20 @@
+<template>
+    <div class = "slds-container_large">
+        <div class = "slds-var-m-bottom_medium">
+            <lightning-datatable
+                    key-field="id"
+                    columns={columns}
+                    data={draftvalues}
+                    hide-checkbox-column='true'>
+            </lightning-datatable>
+        </div>
+        <div class = "slds-var-m-bottom_medium">
+            <lightning-datatable
+                    key-field="id"
+                    columns={columnsss}
+                    data={draftbookvalues}
+                    hide-checkbox-column='true'>
+            </lightning-datatable>
+        </div>
+    </div>
+</template>
