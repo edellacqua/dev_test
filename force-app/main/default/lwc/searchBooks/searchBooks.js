@@ -1,4 +1,4 @@
-import { LightningElement, track, wire } from 'lwc';
+import { api, LightningElement, track, wire } from 'lwc';
 import getLibraries from '@salesforce/apex/LibraryController.getLibraries';
 
 let i = 0;
@@ -6,6 +6,8 @@ export default class SearchBooks extends LightningElement {
     @track value = '';
     @track error;
     @track items = [];
+    @track filter = '';
+    @track result = '';
 
     @wire(getLibraries, {})
     comboBoxItems({ error, data }) {
@@ -25,6 +27,14 @@ export default class SearchBooks extends LightningElement {
     }
     
     handleChange(event) {
-            this.value = event.detail.value;
+        this.value = event.detail.value;
+    }
+
+    filterChange(event) {
+        this.filter = event.detail.value;
+    }
+
+    clickSearch(event) {
+        this.result = this.filter;
     }
 }
