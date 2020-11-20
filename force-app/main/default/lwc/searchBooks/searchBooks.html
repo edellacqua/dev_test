@@ -9,10 +9,10 @@
                     onchange={handleChange} >
                 </lightning-combobox>
             </div>
-            <div class="slds-var-m-top_medium">
-                <lightning-textarea name="input3" rows=1 placeholder="Filter..." onchange={filterChange}></lightning-textarea>
+            <div class="slds-var-m-top_medium lgc-bg">
+                <lightning-input type="text" placeholder="Search..." onchange={filterChange}></lightning-input>
             </div>
-            <div class="slds-var-m-top_xx-large">
+            <div class="slds-align_absolute-center slds-var-m-top_xx-large">
                 <lightning-button
                     label = "Search..."
                     onclick={clickSearch}>

@@ -1,6 +1,7 @@
 <template>
     <div class = "slds-container_large">
-        <div class = "slds-var-m-bottom_medium">
+        <div class = "slds-box slds-theme_default slds-var-m-bottom_medium">
+            <h2>Users</h2>
             <lightning-datatable
                     key-field="id"
                     columns={columns}
@@ -8,7 +9,8 @@
                     hide-checkbox-column='true'>
             </lightning-datatable>
         </div>
-        <div class = "slds-var-m-bottom_medium">
+        <div class = "slds-box slds-theme_default slds-var-m-bottom_medium">
+            <h2>Books</h2>
             <lightning-datatable
                     key-field="id"
                     columns={columnsss}
